@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { computeGlobalMissionScore, getMission } from '../../../../../lib/repository';
 
+export const dynamic = 'force-dynamic';
+
 interface Params { params: { id: string } }
 
 export async function GET(_: Request, { params }: Params) {

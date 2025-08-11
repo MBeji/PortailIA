@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../../../lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
 interface Params { params: { id: string } }
 
 export async function PATCH(req: NextRequest, { params }: Params) {

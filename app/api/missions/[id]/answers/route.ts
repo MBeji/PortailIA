@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { listAnswers } from '../../../../../lib/repository';
 
+export const dynamic = 'force-dynamic';
+
 interface Params { params: { id: string }; searchParams?: { department?: string } }
 
 export async function GET(req: Request, { params }: Params) {
