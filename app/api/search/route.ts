@@ -7,12 +7,12 @@ export async function GET(req: Request) {
   const q = (searchParams.get('q') || '').trim();
   if(!q) return NextResponse.json({ missions: [], recommendations: [], knowledge: [] });
   const missions = await prisma.mission.findMany({
-    where: { OR: [ { title: { contains: q, mode: 'insensitive' } }, { company: { name: { contains: q, mode: 'insensitive' } } } ] },
+    where: { OR: [ { title: { contains: q } }, { company: { name: { contains: q } } } ] },
     include: { company: true },
     take: 10
   });
   const recommendations = await prisma.recommendation.findMany({
-    where: { OR: [ { title: { contains: q, mode: 'insensitive' } }, { description: { contains: q, mode: 'insensitive' } } ] },
+    where: { OR: [ { title: { contains: q } }, { description: { contains: q } } ] },
     take: 15,
     orderBy: { priority: 'desc' }
   });
