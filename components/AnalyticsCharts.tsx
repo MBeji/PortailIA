@@ -30,6 +30,7 @@ async function fetchMissions() {
 export default function AnalyticsCharts() {
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [deptFilter, setDeptFilter] = useState<string>('');
   const missionCtx = useContext(MissionContext);
   const missionId = missionCtx?.missionId || '';
@@ -46,13 +47,27 @@ export default function AnalyticsCharts() {
   useEffect(() => {
     if(!missionId) return;
     setLoading(true);
-    fetch(`/api/missions/${missionId}/analytics`).then(r=>r.json()).then(j=>{ setData(j); setLoading(false); });
+    setError(null);
+    fetch(`/api/missions/${missionId}/analytics`).then(async r => {
+      let j: any = null;
+      try { j = await r.json(); } catch { throw new Error('Réponse analytics invalide'); }
+      if(!j || typeof j !== 'object') throw new Error('Format analytics invalide');
+      const depts = Array.isArray(j.departments) ? j.departments : [];
+      const cats = Array.isArray(j.categories) ? j.categories : [];
+      setData({ missionId: j.missionId || missionId, departments: depts, categories: cats });
+    }).catch(e => {
+      setError(e.message || 'Erreur chargement analytics');
+      setData(null);
+    }).finally(()=> setLoading(false));
   }, [missionId]);
 
   if(!missionId && loadingMissions) {
     return <div className="mt-4"><Skeleton className="h-8 w-48" /></div>;
   }
   if(!missionId) return null;
+
+  const departments = data?.departments || [];
+  const categories = data?.categories || [];
 
   return (
     <div className="space-y-4">
@@ -72,21 +87,26 @@ export default function AnalyticsCharts() {
             <label className="text-gray-500">Département focus</label>
             <select value={deptFilter} onChange={e=>setDeptFilter(e.target.value)} className="rounded border px-2 py-1 text-xs">
               <option value="">(tous)</option>
-              {data?.departments.map(d=> <option key={d.department} value={d.department}>{d.department}</option>)}
+              {departments.map(d=> <option key={d.department} value={d.department}>{d.department}</option>)}
             </select>
           </div>
         </div>
       </div>
       {loading && <div className="grid gap-4 lg:grid-cols-2"><Skeleton className="h-72 w-full" /><Skeleton className="h-72 w-full" /></div>}
-      {!loading && data && (
+      {error && !loading && (
+        <div className="rounded border border-red-300 bg-red-50 p-3 text-xs text-red-700 dark:border-red-700 dark:bg-red-900/40 dark:text-red-200">
+          {error}
+        </div>
+      )}
+      {!loading && !error && data && (
         <div className="grid gap-4 lg:grid-cols-2">
           <Card>
             <h3 className="mb-2 text-sm font-medium">Score par département</h3>
             <Bar height={260} data={{
-              labels: data.departments.map(d=>d.department),
+              labels: departments.map(d=>d.department),
               datasets: [{
                 label: '%',
-                data: data.departments.map(d=> Math.round(d.percent*10)/10),
+                data: departments.map(d=> Math.round(d.percent*10)/10),
                 backgroundColor: 'rgba(29,111,216,0.5)',
                 borderColor: 'rgba(29,111,216,1)',
                 borderWidth: 1
@@ -96,10 +116,10 @@ export default function AnalyticsCharts() {
           <Card>
             <h3 className="mb-2 text-sm font-medium">Catégories (radar)</h3>
             <Radar height={260} data={{
-              labels: data.categories.map(c=>c.category),
+              labels: categories.map(c=>c.category),
               datasets: [{
                 label: deptFilter || 'Global',
-                data: data.categories.map(c=> Math.round(c.percent*10)/10),
+                data: categories.map(c=> Math.round(c.percent*10)/10),
                 backgroundColor: 'rgba(20,93,184,0.3)',
                 borderColor: 'rgba(20,93,184,0.8)',
                 pointBackgroundColor: 'rgba(20,93,184,1)'
