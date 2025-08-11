@@ -80,6 +80,7 @@ export default function MissionsPanel() {
 
 function MissionCard({ mission }: { mission: any }) {
   const { data } = useQuery({ queryKey: ['mission-score', mission.id], queryFn: () => fetchMissionScore(mission.id), staleTime: 10000 });
+  const { start: startGlobal, stop: stopGlobal } = useGlobalLoading();
   const qc = useQueryClient();
   const pushToast = useToast();
   const [editing, setEditing] = React.useState(false);
@@ -130,7 +131,7 @@ function MissionCard({ mission }: { mission: any }) {
         </div>
       )}
       <div className="mt-2 flex flex-wrap gap-2 text-[11px] items-center">
-  <a className="text-blue-600 hover:underline" href={`/api/missions/${mission.id}/export`} onClick={(e)=>{ /* trigger global loading bar */ const { start, stop } = (function(){ try { return (window as any).useGlobalLoading?.() || {}; } catch { return {}; } })(); start && start(); setTimeout(()=>stop&&stop(), 4000); }}>Export</a>
+        <a className="text-blue-600 hover:underline" href={`/api/missions/${mission.id}/export`} onClick={()=>{ startGlobal(); setTimeout(()=>stopGlobal(), 4000); }}>Export</a>
         <a className="text-blue-600 hover:underline" href={`/plan/action`}>Plan</a>
         <ModifyMissionButton id={mission.id} />
         {!editing && <button onClick={()=>setEditing(true)} className="text-amber-600" title="Renommer / Modifier titre & statut">✏️</button>}
