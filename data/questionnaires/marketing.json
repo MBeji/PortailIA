@@ -1,0 +1,100 @@
+{
+  "department": "marketing",
+  "questions": [
+    {
+      "id": "marketing.segmentation",
+      "category": "Segmentation",
+      "text": "Méthode principale de segmentation client ?",
+      "weight": 3,
+      "options": [
+        { "value": "none", "label": "Basique démographique", "level": 0 },
+        { "value": "cluster", "label": "Clustering comportemental", "level": 3 },
+        { "value": "dynamic_ml", "label": "Segmentation dynamique ML", "level": 5 }
+      ]
+    },
+    {
+      "id": "marketing.personalization",
+      "category": "Personnalisation",
+      "text": "Personnalisation des campagnes et contenus ?",
+      "weight": 4,
+      "options": [
+        { "value": "none", "label": "Aucune", "level": 0 },
+        { "value": "rule_based", "label": "Règles simples", "level": 2 },
+        { "value": "reco_engine", "label": "Moteur de reco", "level": 4 },
+        { "value": "real_time_ai", "label": "Personnalisation temps réel IA", "level": 5 }
+      ]
+    },
+    {
+      "id": "marketing.attribution",
+      "category": "Attribution",
+      "text": "Sophistication du modèle d'attribution marketing ?",
+      "weight": 2,
+      "options": [
+        { "value": "last_click", "label": "Last click / basique", "level": 0 },
+        { "value": "multi_touch_rules", "label": "Multi-touch règles", "level": 2 },
+        { "value": "data_driven_ml", "label": "Data-driven ML", "level": 4 },
+        { "value": "incrementality_ai", "label": "Incrementality / uplift AI", "level": 5 }
+      ]
+    },
+    {
+      "id": "marketing.cdp_integration",
+      "category": "Données Client",
+      "text": "Intégration & unification des données clients (CDP) ?",
+      "weight": 3,
+      "options": [
+        { "value": "silo", "label": "Silos multiples", "level": 0 },
+        { "value": "batch_etl", "label": "ETL batch partiel", "level": 2 },
+        { "value": "cdp_core", "label": "CDP centralisée", "level": 4 },
+        { "value": "real_time_id_graph", "label": "ID graph temps réel", "level": 5 }
+      ]
+    },
+    {
+      "id": "marketing.content_generation",
+      "category": "Génération Contenu",
+      "text": "Automatisation / Génération de contenus (textes, visuels) ?",
+      "weight": 2,
+      "options": [
+        { "value": "manual", "label": "Production manuelle", "level": 0 },
+        { "value": "templates", "label": "Templates réutilisés", "level": 2 },
+        { "value": "assist_genai", "label": "Assistance GenAI", "level": 4 },
+        { "value": "orchestrated_genai", "label": "Orchestration multicanale GenAI", "level": 5 }
+      ]
+    },
+    {
+      "id": "marketing.predictive_churn",
+      "category": "Rétention",
+      "text": "Modélisation prédictive du churn / rétention ?",
+      "weight": 3,
+      "options": [
+        { "value": "none", "label": "Aucune", "level": 0 },
+        { "value": "basic_scores", "label": "Scores descriptifs", "level": 2 },
+        { "value": "ml_models", "label": "Modèles ML", "level": 4 },
+        { "value": "real_time_action", "label": "Actions temps réel orchestrées", "level": 5 }
+      ]
+    },
+    {
+      "id": "marketing.pricing_optimization",
+      "category": "Pricing",
+      "text": "Optimisation dynamique des prix ?",
+      "weight": 2,
+      "options": [
+        { "value": "manual", "label": "Manuelle", "level": 0 },
+        { "value": "elasticity_basic", "label": "Elasticité basique", "level": 2 },
+        { "value": "ml_dynamic", "label": "Dynamic pricing ML", "level": 4 },
+        { "value": "real_time_opt", "label": "Optimisation temps réel multi-facteurs", "level": 5 }
+      ]
+    },
+    {
+      "id": "marketing.test_learn",
+      "category": "Expérimentation",
+      "text": "Culture et cadence de test & learn marketing ?",
+      "weight": 2,
+      "options": [
+        { "value": "ad_hoc", "label": "Ad hoc", "level": 0 },
+        { "value": "ab_manual", "label": "A/B ponctuels", "level": 2 },
+        { "value": "automated_framework", "label": "Framework automatisé", "level": 4 },
+        { "value": "continuous_bandits", "label": "Bandits / optimisation continue", "level": 5 }
+      ]
+    }
+  ]
+}

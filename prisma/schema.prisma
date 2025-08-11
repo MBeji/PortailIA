@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Company {
+  id        String    @id @default(cuid())
+  name      String
+  sector    String?
+  size      String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  missions  Mission[]
+}
+
+model Mission {
+  id               String            @id @default(cuid())
+  companyId        String
+  title            String
+  status           String            @default("DRAFT")
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  answers          Answer[]
+  departmentScores DepartmentScore[]
+  company          Company           @relation(fields: [companyId], references: [id])
+  recommendations  Recommendation[]
+}
+
+model DepartmentScore {
+  id         String   @id @default(cuid())
+  missionId  String
+  department String
+  score      Float
+  maxScore   Float
+  level      Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  mission    Mission  @relation(fields: [missionId], references: [id])
+}
+
+model Answer {
+  id         String   @id @default(cuid())
+  missionId  String
+  department String
+  questionId String
+  value      String
+  weight     Float
+  level      Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  mission    Mission  @relation(fields: [missionId], references: [id])
+
+  @@unique([missionId, questionId])
+}
+
+model Recommendation {
+  id          String   @id @default(cuid())
+  mission     Mission  @relation(fields: [missionId], references: [id])
+  missionId   String
+  department  String
+  questionId  String
+  title       String
+  description String
+  impact      Int
+  feasibility Int
+  roiScore    Int
+  effort      Int?
+  status      String   @default("TODO")
+  priority    Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([missionId, questionId])
+  @@index([missionId, department])
+}
+
+model KnowledgeItem {
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  title      String
+  sector     String?
+  department String?
+  tags       String?
+  content    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}

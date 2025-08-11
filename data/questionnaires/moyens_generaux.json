@@ -1,0 +1,17 @@
+{
+  "department": "moyens_generaux",
+  "questions": [
+    {
+      "id": "moyens_generaux.gestion_parc",
+      "category": "Assets",
+      "text": "Niveau de digitalisation de la gestion de parc / facilities ?",
+      "weight": 2,
+      "options": [
+        { "value": "manuel", "label": "Manuel", "level": 0 },
+        { "value": "outil", "label": "Outil centralisé", "level": 2 },
+        { "value": "iot", "label": "IoT + alertes", "level": 4 },
+        { "value": "iot_ai", "label": "IoT + IA prédictive", "level": 5 }
+      ]
+    }
+  ]
+}

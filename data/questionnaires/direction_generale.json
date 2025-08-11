@@ -1,0 +1,17 @@
+{
+  "department": "direction_generale",
+  "questions": [
+    {
+      "id": "direction_generale.kpi_alignment",
+      "category": "Pilotage",
+      "text": "Alignement des KPIs stratégiques et diffusion data-driven ?",
+      "weight": 3,
+      "options": [
+        { "value": "excel", "label": "Excel ponctuel", "level": 0 },
+        { "value": "dashboard", "label": "Dashboards mensuels", "level": 2 },
+        { "value": "predictif", "label": "Prévisionnel intégré", "level": 4 },
+        { "value": "prescriptif", "label": "Pilotage prescriptif IA", "level": 5 }
+      ]
+    }
+  ]
+}

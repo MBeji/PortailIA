@@ -1,0 +1,17 @@
+{
+  "department": "controle_gestion",
+  "questions": [
+    {
+      "id": "controle_gestion.analytique_marge",
+      "category": "Analytique",
+      "text": "Granularité du suivi de marge par segment ?",
+      "weight": 3,
+      "options": [
+        { "value": "base", "label": "Global", "level": 0 },
+        { "value": "produit", "label": "Produit", "level": 2 },
+        { "value": "produit_client", "label": "Produit x Client", "level": 4 },
+        { "value": "temps_reel", "label": "Temps réel prédictif", "level": 5 }
+      ]
+    }
+  ]
+}

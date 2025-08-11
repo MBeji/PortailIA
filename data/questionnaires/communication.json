@@ -1,0 +1,17 @@
+{
+  "department": "communication",
+  "questions": [
+    {
+      "id": "communication.brand_monitoring",
+      "category": "Marque",
+      "text": "Surveillance de la e-réputation / brand sentiment ?",
+      "weight": 2,
+      "options": [
+        { "value": "aucune", "label": "Aucune", "level": 0 },
+        { "value": "veille", "label": "Veille manuelle", "level": 1 },
+        { "value": "outil", "label": "Outil monitoring", "level": 3 },
+        { "value": "ia_sentiment", "label": "IA sentiment temps réel", "level": 5 }
+      ]
+    }
+  ]
+}

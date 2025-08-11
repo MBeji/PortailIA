@@ -1,0 +1,78 @@
+{
+  "department": "rh",
+  "questions": [
+    {
+      "id": "rh.training",
+      "category": "Formation",
+      "text": "Existe-t-il un programme structuré de formation aux compétences IA / Data ?",
+      "weight": 4,
+      "options": [
+        { "value": "none", "label": "Aucun", "level": 0 },
+        { "value": "ad-hoc", "label": "Ad-hoc", "level": 1 },
+        { "value": "basic", "label": "Basique", "level": 2 },
+        { "value": "structured", "label": "Structuré", "level": 4 },
+        { "value": "continuous", "label": "Continu & mesuré", "level": 5 }
+      ]
+    },
+    {
+      "id": "rh.talent_analytics",
+      "category": "Talent Analytics",
+      "text": "Utilisation analytique pour le suivi des talents (attrition, performance) ?",
+      "weight": 3,
+      "options": [
+        { "value": "none", "label": "Aucune", "level": 0 },
+        { "value": "descriptive", "label": "Descriptive", "level": 2 },
+        { "value": "predictive", "label": "Prédictive", "level": 4 },
+        { "value": "prescriptive", "label": "Prescriptive", "level": 5 }
+      ]
+    },
+    {
+      "id": "rh.recruitment_automation",
+      "category": "Recrutement",
+      "text": "Automatisation & IA dans le tri / matching des candidatures ?",
+      "weight": 2,
+      "options": [
+        { "value": "manual", "label": "Tri manuel", "level": 0 },
+        { "value": "keyword", "label": "Mots-clés / parsing", "level": 2 },
+        { "value": "ml_scoring", "label": "Scoring ML équitable", "level": 4 },
+        { "value": "continuous_fit_ai", "label": "Matching dynamique IA", "level": 5 }
+      ]
+    },
+    {
+      "id": "rh.internal_mobility_graph",
+      "category": "Mobilité",
+      "text": "Graph de compétences interne & mobilité assistée ?",
+      "weight": 2,
+      "options": [
+        { "value": "none", "label": "Aucun", "level": 0 },
+        { "value": "skills_catalog_basic", "label": "Catalogue basique", "level": 2 },
+        { "value": "skills_graph_ml", "label": "Graph compétences ML", "level": 4 },
+        { "value": "predictive_pathing", "label": "Parcours prédictifs personnalisés", "level": 5 }
+      ]
+    },
+    {
+      "id": "rh.employee_engagement_insights",
+      "category": "Engagement",
+      "text": "Analyse continue de l'engagement collaborateurs ?",
+      "weight": 2,
+      "options": [
+        { "value": "annual_survey", "label": "Enquête annuelle", "level": 0 },
+        { "value": "pulse_surveys", "label": "Pulse surveys", "level": 2 },
+        { "value": "nlp_feedback", "label": "NLP sur feedbacks", "level": 4 },
+        { "value": "predictive_engagement", "label": "Prédiction & actions ciblées", "level": 5 }
+      ]
+    },
+    {
+      "id": "rh.pay_equity_analytics",
+      "category": "Équité Salariale",
+      "text": "Analyse d'équité salariale (pay equity) ?",
+      "weight": 1,
+      "options": [
+        { "value": "none", "label": "Aucune", "level": 0 },
+        { "value": "basic_reporting", "label": "Reporting basique", "level": 2 },
+        { "value": "ml_adjustments", "label": "Ajustements ML", "level": 4 },
+        { "value": "real_time_policy", "label": "Surveillance temps réel", "level": 5 }
+      ]
+    }
+  ]
+}

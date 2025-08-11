@@ -1,0 +1,27 @@
+{
+  "department": "rfp",
+  "questions": [
+    {
+      "id": "rfp.automation",
+      "text": "Automatisation de l'analyse des RFP entrants ?",
+      "weight": 3,
+      "options": [
+        { "value": "manual", "label": "Lecture manuelle", "level": 0 },
+        { "value": "keyword", "label": "Extraction mots-clés", "level": 2 },
+        { "value": "semantic_ml", "label": "Analyse sémantique ML", "level": 4 },
+        { "value": "genai_full", "label": "Synthèse & structuration GenAI", "level": 5 }
+      ]
+    },
+    {
+      "id": "rfp.response_generation",
+      "text": "Génération assistée des réponses aux RFP ?",
+      "weight": 2,
+      "options": [
+        { "value": "manual", "label": "Manuelle", "level": 0 },
+        { "value": "template", "label": "Templates basiques", "level": 1 },
+        { "value": "assist_genai", "label": "Assistance GenAI", "level": 4 },
+        { "value": "orchestrated_genai", "label": "Orchestration multi-sources GenAI", "level": 5 }
+      ]
+    }
+  ]
+}

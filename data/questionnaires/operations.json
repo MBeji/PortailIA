@@ -1,0 +1,89 @@
+{
+  "department": "operations",
+  "questions": [
+    {
+      "id": "operations.process_visibility",
+      "category": "Visibilité",
+      "text": "Niveau de visibilité en temps réel sur les KPIs opérationnels clés ?",
+      "weight": 3,
+      "options": [
+        { "value": "none", "label": "Très faible", "level": 0 },
+        { "value": "dashboard", "label": "Tableaux de bord basiques", "level": 2 },
+        { "value": "predictive", "label": "Indicateurs prédictifs", "level": 4 },
+        { "value": "prescriptive", "label": "Alerte & optimisation prescriptive", "level": 5 }
+      ]
+    },
+    {
+      "id": "operations.maintenance",
+      "category": "Maintenance",
+      "text": "Maturité de la maintenance prédictive sur les actifs critiques ?",
+      "weight": 4,
+      "options": [
+        { "value": "reactive", "label": "Réactive", "level": 0 },
+        { "value": "preventive", "label": "Préventive calendrier", "level": 2 },
+        { "value": "predictive", "label": "Prédictive ML", "level": 4 },
+        { "value": "prescriptive", "label": "Prescriptive optimisée", "level": 5 }
+      ]
+    },
+    {
+      "id": "operations.throughput_optimization",
+      "category": "Planification",
+      "text": "Optimisation du flux / throughput (planification, ordonnancement) ?",
+      "weight": 3,
+      "options": [
+        { "value": "manual", "label": "Manuelle", "level": 0 },
+        { "value": "rules_mrp", "label": "MRP / règles", "level": 2 },
+        { "value": "ml_planning", "label": "Planning ML", "level": 4 },
+        { "value": "adaptive_ai", "label": "Orchestration adaptative IA", "level": 5 }
+      ]
+    },
+    {
+      "id": "operations.inventory_optimization",
+      "category": "Stocks",
+      "text": "Optimisation des stocks et réapprovisionnements ?",
+      "weight": 2,
+      "options": [
+        { "value": "manual", "label": "Réappro manuel", "level": 0 },
+        { "value": "safety_stock_rules", "label": "Règles stock sécurités", "level": 2 },
+        { "value": "ml_forecast_replen", "label": "Prévision & réappro ML", "level": 4 },
+        { "value": "real_time_auto", "label": "Ajustement temps réel IA", "level": 5 }
+      ]
+    },
+    {
+      "id": "operations.quality_inspection",
+      "category": "Qualité",
+      "text": "Automatisation du contrôle qualité (vision / capteurs) ?",
+      "weight": 2,
+      "options": [
+        { "value": "manual", "label": "Inspection manuelle", "level": 0 },
+        { "value": "sampling", "label": "Échantillonnage", "level": 2 },
+        { "value": "cv_ml", "label": "Vision ML batch", "level": 4 },
+        { "value": "cv_edge_real_time", "label": "Vision temps réel edge", "level": 5 }
+      ]
+    },
+    {
+      "id": "operations.energy_optimization",
+      "category": "Énergie",
+      "text": "Optimisation de la consommation énergétique ?",
+      "weight": 2,
+      "options": [
+        { "value": "none", "label": "Suivi basique", "level": 0 },
+        { "value": "dash_monitoring", "label": "Monitoring dashboards", "level": 2 },
+        { "value": "predictive_control", "label": "Contrôle prédictif", "level": 4 },
+        { "value": "prescriptive_opt", "label": "Optimisation prescriptive IA", "level": 5 }
+      ]
+    },
+    {
+      "id": "operations.worker_augmentation",
+      "category": "Augmentation",
+      "text": "Augmentation opérateurs (assistants numériques / AR) ?",
+      "weight": 1,
+      "options": [
+        { "value": "none", "label": "Aucun", "level": 0 },
+        { "value": "digital_work_instructions", "label": "Instructions digitales", "level": 2 },
+        { "value": "assist_ml", "label": "Assistant ML contextuel", "level": 4 },
+        { "value": "adaptive_copilot", "label": "Copilot adaptatif AR", "level": 5 }
+      ]
+    }
+  ]
+}

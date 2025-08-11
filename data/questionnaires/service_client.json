@@ -1,0 +1,76 @@
+{
+  "department": "service_client",
+  "questions": [
+    {
+      "id": "service_client.chatbot",
+      "category": "Automatisation",
+      "text": "Niveau d'automatisation des interactions client (chatbot / agent virtuel) ?",
+      "weight": 3,
+      "options": [
+        { "value": "none", "label": "Aucune", "level": 0 },
+        { "value": "faq_bot", "label": "FAQ statique", "level": 1 },
+        { "value": "nlp_bot", "label": "Bot NLP", "level": 3 },
+        { "value": "genai_agent", "label": "Agent conversationnel GenAI", "level": 5 }
+      ]
+    },
+    {
+      "id": "service_client.sentiment",
+      "category": "Sentiment",
+      "text": "Analyse de sentiment / émotions sur interactions ?",
+      "weight": 2,
+      "options": [
+        { "value": "none", "label": "Non", "level": 0 },
+        { "value": "batch_basic", "label": "Batch basique", "level": 2 },
+        { "value": "real_time", "label": "Temps réel multi-canaux", "level": 5 }
+      ]
+    },
+    {
+      "id": "service_client.csat_prediction",
+      "category": "Satisfaction",
+      "text": "Prédiction de la satisfaction (CSAT/NPS) & actions proactives ?",
+      "weight": 2,
+      "options": [
+        { "value": "none", "label": "Aucune", "level": 0 },
+        { "value": "basic_reporting", "label": "Reporting basique", "level": 2 },
+        { "value": "ml_prediction", "label": "Modèles prédictifs", "level": 4 },
+        { "value": "real_time_proactive", "label": "Actions proactives temps réel", "level": 5 }
+      ]
+    },
+    {
+      "id": "service_client.routing_intelligence",
+      "category": "Routage",
+      "text": "Intelligence de routage des tickets / demandes ?",
+      "weight": 2,
+      "options": [
+        { "value": "manual", "label": "Manuel / FIFO", "level": 0 },
+        { "value": "rules", "label": "Règles basiques", "level": 2 },
+        { "value": "ml_skills_based", "label": "Matching compétences ML", "level": 4 },
+        { "value": "adaptive_load_ai", "label": "Routage adaptatif charge & valeur", "level": 5 }
+      ]
+    },
+    {
+      "id": "service_client.knowledge_base_ai",
+      "category": "Base Connaissances",
+      "text": "Qualité & exploitation de la base de connaissances interne ?",
+      "weight": 2,
+      "options": [
+        { "value": "static_articles", "label": "Articles statiques", "level": 0 },
+        { "value": "tagged_search", "label": "Recherche taguée", "level": 2 },
+        { "value": "semantic_search", "label": "Recherche sémantique", "level": 4 },
+        { "value": "genai_answer", "label": "Synthèse générative validée", "level": 5 }
+      ]
+    },
+    {
+      "id": "service_client.voice_analytics",
+      "category": "Voix",
+      "text": "Analyse conversationnelle voix (speech analytics) ?",
+      "weight": 1,
+      "options": [
+        { "value": "none", "label": "Aucune", "level": 0 },
+        { "value": "transcription_basic", "label": "Transcription basique", "level": 2 },
+        { "value": "intent_sentiment_ml", "label": "Intent & sentiment ML", "level": 4 },
+        { "value": "real_time_guidance", "label": "Coaching temps réel", "level": 5 }
+      ]
+    }
+  ]
+}

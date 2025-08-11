@@ -1,0 +1,77 @@
+{
+  "department": "produit_innovation",
+  "questions": [
+    {
+      "id": "produit.ideation_data",
+      "category": "Idéation",
+      "text": "Utilisation de la data / IA pour l'idéation produit ?",
+      "weight": 3,
+      "options": [
+        { "value": "none", "label": "Intuition", "level": 0 },
+        { "value": "market_desk", "label": "Analyses marché ponctuelles", "level": 2 },
+        { "value": "predictive_trends", "label": "Prédiction tendances", "level": 4 },
+        { "value": "genai_cocreation", "label": "Co-création GenAI", "level": 5 }
+      ]
+    },
+    {
+      "id": "produit.prototype_speed",
+      "category": "Prototypage",
+      "text": "Vitesse de prototypage assistée par IA (génération, tests) ?",
+      "weight": 3,
+      "options": [
+        { "value": "manual", "label": "Manuelle", "level": 0 },
+        { "value": "assisted", "label": "Assistée outils low-code", "level": 2 },
+        { "value": "ai_generated", "label": "Génération IA prototypes", "level": 4 },
+        { "value": "continuous_loop", "label": "Boucle continue IA utilisateurs", "level": 5 }
+      ]
+    },
+    {
+      "id": "produit.roadmap_prioritization",
+      "category": "Roadmap",
+      "text": "Méthodologie de priorisation roadmap (data-driven) ?",
+      "weight": 2,
+      "options": [
+        { "value": "gut_feel", "label": "Intuition / opportunités", "level": 0 },
+        { "value": "scoring_simple", "label": "Scoring pondéré simple", "level": 2 },
+        { "value": "multi_factor_ml", "label": "Modèles multi-facteurs ML", "level": 4 },
+        { "value": "portfolio_sim", "label": "Simulation portefeuille & valeur", "level": 5 }
+      ]
+    },
+    {
+      "id": "produit.usage_analytics_depth",
+      "category": "Analytics Usage",
+      "text": "Profondeur des analytics d'usage produit ?",
+      "weight": 2,
+      "options": [
+        { "value": "basic_events", "label": "Événements basiques", "level": 0 },
+        { "value": "funnels", "label": "Funnels & cohortes", "level": 2 },
+        { "value": "predictive_clustering", "label": "Clustering & prédiction comportement", "level": 4 },
+        { "value": "real_time_personalization", "label": "Personnalisation temps réel", "level": 5 }
+      ]
+    },
+    {
+      "id": "produit.feature_experimentation",
+      "category": "Expérimentation",
+      "text": "Cadre d'expérimentation (A/B, multi-arm) sur fonctionnalités ?",
+      "weight": 2,
+      "options": [
+        { "value": "ad_hoc", "label": "Ad hoc", "level": 0 },
+        { "value": "basic_platform", "label": "Plateforme basique", "level": 2 },
+        { "value": "automated_stat", "label": "Stat avancée automatisée", "level": 4 },
+        { "value": "bandits_rl", "label": "Bandits / RL continu", "level": 5 }
+      ]
+    },
+    {
+      "id": "produit.genai_integration",
+      "category": "GenAI",
+      "text": "Intégration de capacités GenAI dans les produits ?",
+      "weight": 2,
+      "options": [
+        { "value": "none", "label": "Aucune", "level": 0 },
+        { "value": "pilot_features", "label": "Fonctionnalités pilotes", "level": 2 },
+        { "value": "core_features", "label": "Fonctionnalités cœur faibles coûts", "level": 4 },
+        { "value": "differentiating_platform", "label": "Plateforme différenciante GenAI", "level": 5 }
+      ]
+    }
+  ]
+}

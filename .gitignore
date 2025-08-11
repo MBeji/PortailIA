@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Production build (if any)
+dist/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Prisma local SQLite DB (do not commit generated data)
+prisma/dev.db
+prisma/prisma/dev.db
+prisma/*.db-journal
+
+# TypeScript incremental build info
+tsconfig.tsbuildinfo
+
+# Misc
+.DS_Store
+.idea/
+.vscode/

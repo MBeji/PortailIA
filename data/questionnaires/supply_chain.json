@@ -1,0 +1,17 @@
+{
+  "department": "supply_chain",
+  "questions": [
+    {
+      "id": "supply_chain.prevision_demande",
+      "category": "Prévision",
+      "text": "Maturité des prévisions de demande ?",
+      "weight": 4,
+      "options": [
+        { "value": "manuel", "label": "Manuel", "level": 0 },
+        { "value": "stat_basique", "label": "Stat basique", "level": 2 },
+        { "value": "ml", "label": "Modèles ML", "level": 4 },
+        { "value": "ml_temps_reel", "label": "ML temps réel adaptatif", "level": 5 }
+      ]
+    }
+  ]
+}

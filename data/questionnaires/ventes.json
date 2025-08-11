@@ -1,0 +1,65 @@
+{
+  "department": "ventes",
+  "questions": [
+    {
+      "id": "ventes.crm_usage",
+      "category": "CRM / Engagement",
+      "text": "Utilisation intelligente du CRM (automatisation scoring, next-best-action) ?",
+      "weight": 4,
+      "options": [
+        { "value": "logging", "label": "Simple enregistrement", "level": 0 },
+        { "value": "scoring_basic", "label": "Scoring règles", "level": 2 },
+        { "value": "ml_scoring", "label": "Scoring ML", "level": 4 },
+        { "value": "nba_ai", "label": "Next best action IA", "level": 5 }
+      ]
+    },
+    {
+      "id": "ventes.forecast",
+      "category": "Prévision",
+      "text": "Précision et sophistication des prévisions de ventes ?",
+      "weight": 3,
+      "options": [
+        { "value": "subjective", "label": "Subjectives", "level": 0 },
+        { "value": "historical", "label": "Historique simple", "level": 2 },
+        { "value": "ml_models", "label": "Modèles ML", "level": 4 },
+        { "value": "continuous_ai", "label": "Amélioration continue IA", "level": 5 }
+      ]
+    },
+    {
+      "id": "ventes.pipeline_health",
+      "category": "Pipeline",
+      "text": "Visibilité et qualité des données du pipeline commercial ?",
+      "weight": 2,
+      "options": [
+        { "value": "low", "label": "Fragmentée / retard", "level": 0 },
+        { "value": "standard_dash", "label": "Dashboards standards", "level": 2 },
+        { "value": "predictive_scoring", "label": "Scoring prédictif opportunités", "level": 4 },
+        { "value": "prescriptive_actions", "label": "Recommandations prescriptives", "level": 5 }
+      ]
+    },
+    {
+      "id": "ventes.deal_pricing_optimization",
+      "category": "Pricing",
+      "text": "Optimisation de pricing / discount sur deals ?",
+      "weight": 2,
+      "options": [
+        { "value": "manual", "label": "Manuel", "level": 0 },
+        { "value": "guidelines", "label": "Guidelines statiques", "level": 2 },
+        { "value": "ml_margin_opt", "label": "Optimisation marge ML", "level": 4 },
+        { "value": "real_time_config_ai", "label": "Configuration & pricing temps réel", "level": 5 }
+      ]
+    },
+    {
+      "id": "ventes.enablement_ai",
+      "category": "Enablement",
+      "text": "Outils d'enablement IA (assistants contenu, objection handling) ?",
+      "weight": 1,
+      "options": [
+        { "value": "none", "label": "Aucun", "level": 0 },
+        { "value": "playbooks_static", "label": "Playbooks statiques", "level": 2 },
+        { "value": "assist_genai", "label": "Assistance GenAI", "level": 4 },
+        { "value": "real_time_coach", "label": "Coach temps réel contextualisé", "level": 5 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "department": "finance",
+  "questions": [
+    {
+      "id": "finance.forecasting",
+      "category": "Prévision",
+      "text": "Niveau de sophistication des modèles de prévision financière ?",
+      "weight": 4,
+      "options": [
+        { "value": "excel_manual", "label": "Excel manuel", "level": 0 },
+        { "value": "basic_stat", "label": "Stat basique", "level": 2 },
+        { "value": "ml_models", "label": "Modèles ML", "level": 4 },
+        { "value": "auto_ml", "label": "AutoML / MLOps", "level": 5 }
+      ]
+    },
+    {
+      "id": "finance.rolling_forecast",
+      "category": "Prévision",
+      "text": "Adoption d'un rolling forecast data-driven ?",
+      "weight": 2,
+      "options": [
+        { "value": "none", "label": "Aucun", "level": 0 },
+        { "value": "quarterly_manual", "label": "Trimestriel manuel", "level": 1 },
+        { "value": "monthly_refresh", "label": "Actualisation mensuelle outil", "level": 3 },
+        { "value": "continuous_predictive", "label": "Flux continu prédictif", "level": 5 }
+      ]
+    },
+    {
+      "id": "finance.anomaly_detection",
+      "category": "Contrôles & Anomalies",
+      "text": "Détection d'anomalies comptables automatisée ?",
+      "weight": 3,
+      "options": [
+        { "value": "none", "label": "Non", "level": 0 },
+        { "value": "rules", "label": "Règles statiques", "level": 2 },
+        { "value": "ml_batch", "label": "ML batch", "level": 4 },
+        { "value": "real_time", "label": "Temps réel adaptatif", "level": 5 }
+      ]
+    },
+    {
+      "id": "finance.cash_forecast",
+      "category": "Trésorerie",
+      "text": "Précision & industrialisation de la prévision de trésorerie ?",
+      "weight": 3,
+      "options": [
+        { "value": "manual", "label": "Manuelle", "level": 0 },
+        { "value": "excel_rules", "label": "Excel + règles", "level": 2 },
+        { "value": "ml_models", "label": "Modèles ML intégrés", "level": 4 },
+        { "value": "scenario_sim", "label": "Simulation scénarios stochastiques", "level": 5 }
+      ]
+    },
+    {
+      "id": "finance.close_process",
+      "category": "Clôture",
+      "text": "Degré d'automatisation du processus de clôture (fast close) ?",
+      "weight": 2,
+      "options": [
+        { "value": "manual", "label": "Fortement manuel", "level": 0 },
+        { "value": "task_workflow", "label": "Workflow tâches", "level": 2 },
+        { "value": "rpa_partial", "label": "RPA partielle", "level": 3 },
+        { "value": "rpa_ai", "label": "RPA + IA anomalies", "level": 4 },
+        { "value": "continuous_close", "label": "Clôture quasi continue", "level": 5 }
+      ]
+    },
+    {
+      "id": "finance.cost_analytics",
+      "category": "Coûts",
+      "text": "Granularité analytique des coûts et allocations dynamiques ?",
+      "weight": 2,
+      "options": [
+        { "value": "basic", "label": "Par centre de coûts", "level": 0 },
+        { "value": "activity_based", "label": "Activity-Based ponctuel", "level": 2 },
+        { "value": "driver_ml", "label": "Drivers identifiés ML", "level": 4 },
+        { "value": "real_time_allocation", "label": "Allocation temps réel", "level": 5 }
+      ]
+    },
+    {
+      "id": "finance.scenario_planning",
+      "category": "Scénarios",
+      "text": "Capacité de simulation de scénarios (stress tests, what-if) ?",
+      "weight": 3,
+      "options": [
+        { "value": "none", "label": "Aucune", "level": 0 },
+        { "value": "manual_excel", "label": "Excel manuel", "level": 2 },
+        { "value": "model_library", "label": "Bibliothèque modèles", "level": 4 },
+        { "value": "probabilistic_sim", "label": "Simulation probabiliste intégrée", "level": 5 }
+      ]
+    },
+    {
+      "id": "finance.data_quality_controls",
+      "category": "Qualité Data",
+      "text": "Automatisation des contrôles de qualité de données financières ?",
+      "weight": 2,
+      "options": [
+        { "value": "ad_hoc", "label": "Ad hoc manuel", "level": 0 },
+        { "value": "rules_engine", "label": "Règles paramétrées", "level": 2 },
+        { "value": "ml_outliers", "label": "Détection outliers ML", "level": 4 },
+        { "value": "self_healing", "label": "Auto-correction assistée", "level": 5 }
+      ]
+    },
+    {
+      "id": "finance.risk_analytics",
+      "category": "Risques",
+      "text": "Utilisation analytique avancée pour la gestion des risques financiers ?",
+      "weight": 3,
+      "options": [
+        { "value": "minimal", "label": "Limité descriptif", "level": 0 },
+        { "value": "kpi_dash", "label": "Dashboards KPIs", "level": 2 },
+        { "value": "predictive_models", "label": "Modèles prédictifs", "level": 4 },
+        { "value": "integrated_risk_ai", "label": "Plateforme intégrée IA", "level": 5 }
+      ]
+    },
+    {
+      "id": "finance.esg_reporting",
+      "category": "ESG",
+      "text": "Automatisation & fiabilité du reporting ESG / extra-financier ?",
+      "weight": 2,
+      "options": [
+        { "value": "manual", "label": "Manuel dispersé", "level": 0 },
+        { "value": "tool_basic", "label": "Outil dédié basique", "level": 2 },
+        { "value": "integrated", "label": "Intégré référentiel data", "level": 4 },
+        { "value": "assurance_ai", "label": "Contrôle assurance IA", "level": 5 }
+      ]
+    }
+  ]
+}
