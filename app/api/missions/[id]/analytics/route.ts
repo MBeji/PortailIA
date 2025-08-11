@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../../../../lib/prisma';
 import { getQuestionnaire } from '../../../../../lib/questionnaire';
 
+export const dynamic = 'force-dynamic';
+
 // GET /api/missions/:id/analytics
 // Returns per-department percent scores + per-category weighted averages (0-100)
 export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
