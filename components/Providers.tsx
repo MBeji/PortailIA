@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import ClientErrorCatcher from './ClientErrorCatcher';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
@@ -65,6 +66,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
                 <style>{`@keyframes loading {0%{transform:translateX(-100%)}50%{transform:translateX(150%)}100%{transform:translateX(150%)}}`}</style>
               </div>
             )}
+            <ClientErrorCatcher />
             {children}
             {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}
           </ToastProvider>
