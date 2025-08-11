@@ -21,7 +21,8 @@
     "types": [
       "node",
       "next",
-      "next/navigation"
+      "next/navigation",
+      "vitest"
     ],
     "plugins": [
       {
