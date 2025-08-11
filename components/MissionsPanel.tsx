@@ -9,8 +9,17 @@ import Skeleton from './ui/Skeleton';
 import { useToast } from './Providers';
 
 async function fetchMissions() {
-  const res = await fetch('/api/missions');
-  return res.json();
+  try {
+    const res = await fetch('/api/missions');
+    const json = await res.json().catch(()=>null);
+    if(!res.ok) {
+      return { __error: json?.error || 'ERR', __detail: json?.detail || 'Missions fetch failed' };
+    }
+    if(Array.isArray(json)) return json;
+    return [];
+  } catch (e:any) {
+    return { __error: 'NETWORK', __detail: e?.message };
+  }
 }
 
 async function fetchMissionScore(id: string) {
@@ -70,9 +79,14 @@ export default function MissionsPanel() {
         </div>
       )}
       {error && <p className="text-sm text-red-600">Erreur de chargement</p>}
+      {(!isLoading && (data as any)?.__error) && (
+        <div className="rounded border border-red-300 bg-red-50 p-2 text-[11px] text-red-700 dark:border-red-700 dark:bg-red-900/30 dark:text-red-200">
+          API missions erreur: {(data as any).__error} – {(data as any).__detail}
+        </div>
+      )}
       <div className="grid gap-4 md:grid-cols-3">
-        {data?.map((m: any) => <MissionCard key={m.id} mission={m} />)}
-        {!isLoading && data?.length === 0 && <p className="text-sm text-gray-500">Aucune mission.</p>}
+        {Array.isArray(data) && data.map((m: any) => <MissionCard key={m.id} mission={m} />)}
+        {!isLoading && Array.isArray(data) && data.length === 0 && <p className="text-sm text-gray-500">Aucune mission.</p>}
       </div>
     </section>
   );
