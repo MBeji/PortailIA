@@ -2,6 +2,8 @@
 import React from 'react';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
+import dynamic from 'next/dynamic';
+const GlobalSearch = dynamic(()=>import('./GlobalSearch'), { ssr:false });
 
 function NavItem({ href, children }: { href: string; children: React.ReactNode }) {
   const pathname = usePathname();
@@ -40,10 +42,12 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         <h1 className="text-sm font-semibold tracking-wide text-primary-700 dark:text-primary-400">Portail IA</h1>
         <ThemeToggle />
       </div>
-      <nav className="flex-1 space-y-1 px-2" onClick={onNavigate}>
+  <div className="px-2 mb-2"><GlobalSearch /></div>
+  <nav className="flex-1 space-y-1 px-2" onClick={onNavigate}>
         <NavItem href="/">Dashboard</NavItem>
         <NavItem href="/questionnaires">Questionnaires</NavItem>
         <NavItem href="/plan/action">Plan d'action</NavItem>
+  <NavItem href="/plan/resume">Résumé exécutif</NavItem>
         <NavItem href="/knowledge/base">Base de connaissance</NavItem>
       </nav>
       <div className="border-t px-4 py-3 text-[10px] text-gray-500 dark:text-gray-400">© {new Date().getFullYear()} Portail IA</div>

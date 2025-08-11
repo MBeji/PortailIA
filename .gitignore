@@ -31,3 +31,6 @@ tsconfig.tsbuildinfo
 .DS_Store
 .idea/
 .vscode/
+
+# Windows device placeholder
+NUL

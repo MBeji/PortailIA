@@ -69,6 +69,10 @@ export async function getMissionWithAnswers(missionId: string) {
   return prisma.mission.findUnique({ where: { id: missionId }, include: { answers: true, departmentScores: true, company: true } });
 }
 
+export async function listAnswers(missionId: string, department?: string) {
+  return prisma.answer.findMany({ where: { missionId, ...(department ? { department } : {}) } });
+}
+
 // --- Recommendations persistence ---
 export async function generateAndPersistRecommendations(missionId: string, department?: string) {
   // Load answers (optionally filter department)

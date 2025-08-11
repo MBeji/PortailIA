@@ -21,8 +21,9 @@ export default function PlanActionPage() {
   const departments = Array.from(new Set(items.map(i => i.department))).sort();
   const phases = Array.from(new Set(items.map(i => i.phase).filter(Boolean))) as string[];
   const statuses = ['TODO','IN_PROGRESS','DONE'];
-  const [sortDir, setSortDir] = useState<'desc'|'asc'>('desc');
-  const [sortSecondary, setSortSecondary] = useState<'effort'|'status'|''>('');
+  const [sortDir, setSortDir] = useState<'desc'|'asc'>(()=> (typeof window !== 'undefined' && (localStorage.getItem('plan.sortDir') as 'asc'|'desc')) || 'desc');
+  const [sortSecondary, setSortSecondary] = useState<'effort'|'status'|''>(()=> (typeof window !== 'undefined' && (localStorage.getItem('plan.sortSecondary') as any)) || '');
+  useEffect(()=>{ if(typeof window !== 'undefined'){ localStorage.setItem('plan.sortDir', sortDir); localStorage.setItem('plan.sortSecondary', sortSecondary); }}, [sortDir, sortSecondary]);
   const pushToast = useToast();
 
   // MVP: pick the most recent mission automatically
@@ -205,7 +206,7 @@ export default function PlanActionPage() {
                               <td className="p-2 align-top font-mono text-[10px]">{item.priority.toFixed(2)}</td>
                               <td className="p-2 align-top">
                                 <select
-                                  className="rounded border bg-white px-1 py-0.5 dark:bg-slate-800"
+                                                  className="rounded border bg-white px-1 py-0.5 focus:border-primary-500 focus:ring-2 focus:ring-primary-300 dark:bg-slate-800"
                                   value={item.status}
                                   onChange={async e => {
                                     try {
@@ -227,11 +228,12 @@ export default function PlanActionPage() {
                                   min={1}
                                   max={5}
                                   defaultValue={item.effort || ''}
-                                  className="w-16 rounded border px-1 py-0.5 dark:bg-slate-800"
+                                  className="w-16 rounded border px-1 py-0.5 focus:border-primary-500 focus:ring-2 focus:ring-primary-300 dark:bg-slate-800"
                                   onChange={e => {
                                     const val = parseInt(e.target.value,10);
                                     if(!val) return; updateEffort(item.id, val);
                                   }}
+                                  onKeyDown={e => { if(e.key==='Enter'){ (e.target as HTMLInputElement).blur(); }} }
                                 />
                               </td>
                             </tr>

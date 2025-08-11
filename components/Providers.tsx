@@ -42,14 +42,40 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const [missionId, setMissionId] = React.useState<string | null>(null);
   const [progressVersion, setProgressVersion] = React.useState(0);
   const bumpProgress = () => setProgressVersion(v=>v+1);
+  // Global loading indicator
+  const [loadCount, setLoadCount] = React.useState(0);
+  const pushLoad = React.useCallback(()=> setLoadCount(c=>c+1),[]);
+  const popLoad = React.useCallback(()=> setLoadCount(c=> Math.max(0,c-1)),[]);
+  // Hydrate mission from localStorage if present
+  React.useEffect(()=>{
+    try { const stored = localStorage.getItem('activeMissionId'); if(stored) setMissionId(stored); } catch {}
+  },[]);
+  React.useEffect(()=>{
+    if(missionId) { try { localStorage.setItem('activeMissionId', missionId); } catch {} }
+  },[missionId]);
   return (
     <QueryClientProvider client={queryClient}>
-  <MissionContext.Provider value={{ missionId, setMissionId, progressVersion, bumpProgress }}>
-        <ToastProvider>
-          {children}
-          {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}
-        </ToastProvider>
+      <MissionContext.Provider value={{ missionId, setMissionId, progressVersion, bumpProgress }}>
+  <GlobalLoadingContext.Provider value={{ push: pushLoad, pop: popLoad, active: loadCount }}>
+          <ToastProvider>
+            {/* Top progress bar */}
+            {loadCount > 0 && (
+              <div className="pointer-events-none fixed inset-x-0 top-0 z-[100] h-1 overflow-hidden bg-primary-100 dark:bg-slate-700">
+                <div className="h-full w-1/3 animate-[loading_1.2s_ease_infinite] bg-primary-600" />
+                <style>{`@keyframes loading {0%{transform:translateX(-100%)}50%{transform:translateX(150%)}100%{transform:translateX(150%)}}`}</style>
+              </div>
+            )}
+            {children}
+            {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}
+          </ToastProvider>
+        </GlobalLoadingContext.Provider>
       </MissionContext.Provider>
     </QueryClientProvider>
   );
+}
+export const GlobalLoadingContext = React.createContext<{ push: ()=>void; pop: ()=>void; active: number } | null>(null);
+export function useGlobalLoading() {
+  const ctx = React.useContext(GlobalLoadingContext);
+  if(!ctx) return { start: ()=>{}, stop: ()=>{} };
+  return { start: ctx.push, stop: ctx.pop };
 }

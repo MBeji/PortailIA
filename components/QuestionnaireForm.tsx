@@ -26,6 +26,21 @@ export default function QuestionnaireForm({ questionnaire }: { questionnaire: Qu
   const missionCtx = React.useContext(MissionContext);
   const missionId = missionCtx?.missionId || null;
 
+  // Prefill existing answers when mission changes
+  useEffect(() => {
+    if(!missionId) return;
+    (async()=>{
+      try {
+        const res = await fetch(`/api/missions/${missionId}/answers?department=${department}`);
+        if(!res.ok) return;
+        const data = await res.json();
+        const map: Record<string,string> = {};
+        data.forEach((a: any) => { map[a.questionId] = a.value; });
+        setAnswers(map);
+      } catch {/* ignore */}
+    })();
+  }, [missionId, department]);
+
   const onChange = (qid: string, value: string) => {
     setAnswers(prev => ({ ...prev, [qid]: value }));
   };
