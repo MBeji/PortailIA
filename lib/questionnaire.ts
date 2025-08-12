@@ -48,3 +48,42 @@ export async function getAllQuestionnaires() {
     return [];
   }
 }
+
+export async function createQuestionnaire(department: string) {
+  const file = path.join(questionnairesDir, `${department}.json`);
+  const exists = await fs.stat(file).then(()=>true).catch(()=>false);
+  if (exists) throw new Error('Questionnaire already exists');
+  const content = { department, questions: [] as any[] };
+  await fs.writeFile(file, JSON.stringify(content, null, 2), 'utf-8');
+  return content;
+}
+
+export async function deleteQuestionnaire(department: string) {
+  const file = path.join(questionnairesDir, `${department}.json`);
+  await fs.unlink(file);
+  return true;
+}
+
+export async function renameQuestionnaire(oldDep: string, newDep: string) {
+  const oldFile = path.join(questionnairesDir, `${oldDep}.json`);
+  const newFile = path.join(questionnairesDir, `${newDep}.json`);
+  const data = await fs.readFile(oldFile, 'utf-8').catch(()=>null);
+  if(!data) throw new Error('Not found');
+  const parsed = JSON.parse(data);
+  parsed.department = newDep;
+  await fs.writeFile(newFile, JSON.stringify(parsed, null, 2), 'utf-8');
+  if (oldFile !== newFile) await fs.unlink(oldFile).catch(()=>{});
+  return parsed;
+}
+
+export async function importQuestionnaire(payload: any, { override = false }: { override?: boolean } = {}) {
+  if (!payload || typeof payload !== 'object' || !payload.department || !Array.isArray(payload.questions)) {
+    throw new Error('Invalid questionnaire payload');
+  }
+  const dep = payload.department;
+  const file = path.join(questionnairesDir, `${dep}.json`);
+  const exists = await fs.stat(file).then(()=>true).catch(()=>false);
+  if (exists && !override) throw new Error('Questionnaire exists; set override to true');
+  await fs.writeFile(file, JSON.stringify({ department: dep, questions: payload.questions }, null, 2), 'utf-8');
+  return { department: dep, questionCount: payload.questions.length };
+}

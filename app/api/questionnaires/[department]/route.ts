@@ -10,6 +10,7 @@ const questionnaireSchema = z.object({
     id: z.string(),
     text: z.string(),
     weight: z.number().min(0),
+    category: z.string().optional(),
     options: z.array(z.object({ value: z.string(), label: z.string(), level: z.number().int().min(0).max(5) }))
   }))
 });
@@ -18,6 +19,7 @@ const questionSchema = z.object({
   id: z.string(),
   text: z.string(),
   weight: z.number().min(0),
+  category: z.string().optional(),
   options: z.array(z.object({ value: z.string(), label: z.string(), level: z.number().int().min(0).max(5) }))
 });
 
