@@ -27,10 +27,10 @@ export async function upsertAnswer(missionId: string, department: string, answer
 
 export async function saveDepartmentScores(missionId: string, department: string) {
   const answers = await prisma.answer.findMany({ where: { missionId, department } });
-  const score = computeDepartmentScore(answers.map(a => ({ weight: a.weight, level: a.level, maxLevel: 5 })));
+  const score = computeDepartmentScore(answers.map(a => ({ weight: a.weight, level: a.level ?? -1, maxLevel: 5 })));
   const level = qualitativeLevel(score.scorePercent);
   const existing = await prisma.departmentScore.findFirst({ where: { missionId, department } });
-  const data = { score: score.score, maxScore: answers.reduce((acc,a)=>acc + a.weight * 5,0), level };
+  const data = { score: score.score, maxScore: answers.filter(a=> (a.level ?? -1) >= 0).reduce((acc,a)=>acc + a.weight * 5,0), level };
   if (existing) return prisma.departmentScore.update({ where: { id: existing.id }, data });
   return prisma.departmentScore.create({ data: { missionId, department, ...data } });
 }

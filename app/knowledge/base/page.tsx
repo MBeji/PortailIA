@@ -3,6 +3,7 @@ import Card from '../../../components/ui/Card';
 import Link from 'next/link';
 import { Badge } from '../../../components/ui/Badge';
 import React from 'react';
+import AdminEditKnowledgeLink from '../../../components/AdminEditKnowledgeLink';
 
 interface KBSearchParams { q?: string; tag?: string }
 export default async function KnowledgeBasePage({ searchParams }: { searchParams?: KBSearchParams }) {
@@ -38,18 +39,24 @@ export default async function KnowledgeBasePage({ searchParams }: { searchParams
       </div>
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {filtered.map((i: any) => (
-          <Link key={i.slug} href={`/knowledge/base/${i.slug}`} className="group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded">
-            <Card className="flex h-full flex-col gap-3 transition group-hover:shadow-md">
-              <div>
-                <h3 className="font-semibold text-sm text-gray-800 group-hover:text-primary-700 dark:group-hover:text-primary-300 line-clamp-2">{i.title}</h3>
-                <p className="mt-1 text-[11px] uppercase tracking-wide text-gray-400">{i.tags.slice(0,3).join(' • ')}</p>
-              </div>
-              <p className="line-clamp-5 text-[13px] leading-snug text-gray-600">{i.content.slice(0,320)}...</p>
-              <div className="mt-auto flex flex-wrap gap-1">
-                {i.tags.map((t: string) => <Badge key={t} variant="neutral">{t}</Badge>)}
-              </div>
-            </Card>
-          </Link>
+          <div key={i.slug} className="group focus:outline-none focus:ring-2 focus:ring-primary-500 rounded relative">
+            <Link href={`/knowledge/base/${i.slug}`}>
+              <Card className="flex h-full flex-col gap-3 transition group-hover:shadow-md">
+                <div>
+                  <h3 className="font-semibold text-sm text-gray-800 group-hover:text-primary-700 dark:group-hover:text-primary-300 line-clamp-2">{i.title}</h3>
+                  <p className="mt-1 text-[11px] uppercase tracking-wide text-gray-400">{i.tags.slice(0,3).join(' • ')}</p>
+                </div>
+                <p className="line-clamp-5 text-[13px] leading-snug text-gray-600">{i.content.slice(0,320)}...</p>
+                <div className="mt-auto flex flex-wrap gap-1">
+                  {i.tags.map((t: string) => <Badge key={t} variant="neutral">{t}</Badge>)}
+                </div>
+              </Card>
+            </Link>
+            {/* Admin-only quick edit link */}
+            <div className="absolute right-2 top-2">
+              <AdminEditKnowledgeLink slug={i.slug} />
+            </div>
+          </div>
         ))}
         {!filtered.length && <div className="text-sm text-gray-500">Aucun résultat</div>}
       </div>

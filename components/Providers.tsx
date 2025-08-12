@@ -13,6 +13,10 @@ export const ToastContext = React.createContext<ToastContextType | null>(null);
 interface MissionContextType { missionId: string | null; setMissionId: (id: string)=>void; progressVersion: number; bumpProgress: ()=>void }
 export const MissionContext = React.createContext<MissionContextType | null>(null);
 
+// Admin context (global admin mode toggle)
+interface AdminContextType { admin: boolean; toggle: ()=>void; set: (v: boolean)=>void }
+export const AdminContext = React.createContext<AdminContextType | null>(null);
+
 function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = React.useState<Toast[]>([]);
   const push = (message: string, type: Toast['type']='info') => {
@@ -43,6 +47,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const [missionId, setMissionId] = React.useState<string | null>(null);
   const [progressVersion, setProgressVersion] = React.useState(0);
   const bumpProgress = () => setProgressVersion(v=>v+1);
+  // Admin mode
+  const [admin, setAdmin] = React.useState<boolean>(false);
   // Global loading indicator
   const [loadCount, setLoadCount] = React.useState(0);
   const pushLoad = React.useCallback(()=> setLoadCount(c=>c+1),[]);
@@ -50,13 +56,18 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   // Hydrate mission from localStorage if present
   React.useEffect(()=>{
     try { const stored = localStorage.getItem('activeMissionId'); if(stored) setMissionId(stored); } catch {}
+    try { const a = localStorage.getItem('adminMode'); if(a) setAdmin(a === '1'); } catch {}
   },[]);
   React.useEffect(()=>{
     if(missionId) { try { localStorage.setItem('activeMissionId', missionId); } catch {} }
   },[missionId]);
+  React.useEffect(()=>{
+    try { localStorage.setItem('adminMode', admin ? '1' : '0'); } catch {}
+  },[admin]);
   return (
     <QueryClientProvider client={queryClient}>
       <MissionContext.Provider value={{ missionId, setMissionId, progressVersion, bumpProgress }}>
+        <AdminContext.Provider value={{ admin, toggle: ()=>setAdmin(v=>!v), set: setAdmin }}>
   <GlobalLoadingContext.Provider value={{ push: pushLoad, pop: popLoad, active: loadCount }}>
           <ToastProvider>
             {/* Top progress bar */}
@@ -66,11 +77,14 @@ export default function Providers({ children }: { children: React.ReactNode }) {
                 <style>{`@keyframes loading {0%{transform:translateX(-100%)}50%{transform:translateX(150%)}100%{transform:translateX(150%)}}`}</style>
               </div>
             )}
+            {/* Global Admin toggle button */}
+            <AdminToggleButton />
             <ClientErrorCatcher />
             {children}
             {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}
           </ToastProvider>
         </GlobalLoadingContext.Provider>
+        </AdminContext.Provider>
       </MissionContext.Provider>
     </QueryClientProvider>
   );
@@ -80,4 +94,24 @@ export function useGlobalLoading() {
   const ctx = React.useContext(GlobalLoadingContext);
   if(!ctx) return { start: ()=>{}, stop: ()=>{} };
   return { start: ctx.push, stop: ctx.pop };
+}
+
+function AdminToggleButton() {
+  const ctx = React.useContext(AdminContext);
+  if(!ctx) return null;
+  return (
+    <button
+      onClick={ctx.toggle}
+      title={ctx.admin ? 'Désactiver le mode Admin' : 'Activer le mode Admin'}
+      className={`fixed right-3 top-3 z-[101] rounded-full border px-3 py-1 text-xs shadow ${ctx.admin? 'bg-amber-600 text-white border-amber-700':'bg-white text-slate-700 border-slate-300 dark:bg-slate-800 dark:text-slate-200'}`}
+    >
+      {ctx.admin ? 'Mode Admin: ON' : 'Mode Admin'}
+    </button>
+  );
+}
+
+export function useAdmin() {
+  const ctx = React.useContext(AdminContext);
+  if(!ctx) return { admin: false, toggle: ()=>{}, set: (_: boolean)=>{} } as AdminContextType;
+  return ctx;
 }

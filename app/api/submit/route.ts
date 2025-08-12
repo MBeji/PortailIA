@@ -34,12 +34,13 @@ export async function POST(req: NextRequest) {
       const mission = await getMission(missionId);
       if(!mission) return NextResponse.json({ error: 'Mission inconnue' }, { status: 404 });
     }
-    const { department, answers } = parsed.data;
+  const { department, answers } = parsed.data;
     for (const a of answers) {
       await upsertAnswer(missionId, department, a);
     }
     await saveDepartmentScores(missionId, department);
-    const score = computeDepartmentScore(answers.map(a => ({ weight: a.weight, level: a.level, maxLevel: 5 })));
+  // Default scale 0..5 with N/A ignored (level < 0)
+  const score = computeDepartmentScore(answers.map(a => ({ weight: a.weight, level: a.level ?? -1, maxLevel: 5 })));
     return NextResponse.json({ missionId, department, score });
   } catch (e:any) {
     console.error('Submit API error', e);

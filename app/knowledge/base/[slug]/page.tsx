@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { getKnowledge } from '../../../../lib/knowledge';
 import Link from 'next/link';
 import { Badge } from '../../../../components/ui/Badge';
+import AdminEditKnowledgeLink from '../../../../components/AdminEditKnowledgeLink';
 
 interface Props { params: { slug: string } }
 
@@ -18,7 +19,10 @@ export default async function KnowledgeItemPage({ params }: Props) {
             <Link href="/knowledge/base" className="underline">← Retour</Link>
             <span>Lecture ~ {item.readingMinutes} min • {item.wordCount} mots</span>
           </div>
-          <h1 className="text-2xl font-semibold leading-tight tracking-tight">{item.title}</h1>
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-2xl font-semibold leading-tight tracking-tight">{item.title}</h1>
+            <AdminEditKnowledgeLink slug={item.slug} />
+          </div>
           <div className="flex flex-wrap gap-1">{item.tags.map(t => <Badge key={t} variant="neutral">{t}</Badge>)}</div>
         </div>
         <div className="prose prose-sm max-w-none dark:prose-invert" dangerouslySetInnerHTML={{ __html: item.html }} />

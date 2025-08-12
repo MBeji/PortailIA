@@ -25,6 +25,15 @@ export default function QuestionnaireForm({ questionnaire }: { questionnaire: Qu
   const { department, questions } = questionnaire;
   const missionCtx = React.useContext(MissionContext);
   const missionId = missionCtx?.missionId || null;
+  // Default maturity scale rendered for every question (requested 0..5 scale)
+  const DEFAULT_SCALE = [
+    { value: '0', label: '0 - Inexistant', level: 0 },
+    { value: '1', label: '1 - Initial', level: 1 },
+    { value: '2', label: '2 - Basique', level: 2 },
+    { value: '3', label: '3 - Intermédiaire', level: 3 },
+    { value: '4', label: '4 - Avancé', level: 4 },
+    { value: '5', label: '5 - Excellence', level: 5 },
+  ];
 
   // Prefill existing answers when mission changes
   useEffect(() => {
@@ -36,6 +45,19 @@ export default function QuestionnaireForm({ questionnaire }: { questionnaire: Qu
         const data = await res.json();
         const map: Record<string,string> = {};
         data.forEach((a: any) => { map[a.questionId] = a.value; });
+        // Normalize any legacy non-scale values to the 0..5 scale using question option levels
+        for (const q of questions) {
+          const v = map[q.id];
+          if (!v) continue;
+          if (v === 'na') continue;
+          // If already one of the default values, keep it
+          if (['0','1','2','3','4','5'].includes(v)) continue;
+          // Else, try to find the level from the original options
+          const lvl = q.options.find(o => o.value === v)?.level;
+          if (typeof lvl === 'number' && lvl >= 0 && lvl <= 5) {
+            map[q.id] = String(lvl);
+          }
+        }
         setAnswers(map);
       } catch {/* ignore */}
     })();
@@ -54,7 +76,14 @@ export default function QuestionnaireForm({ questionnaire }: { questionnaire: Qu
         questionId: q.id,
         value: answers[q.id],
         weight: q.weight,
-        level: q.options.find(o => o.value === answers[q.id])?.level || 0
+        // Map level from default scale first; fallback to original options for legacy values
+        level: (() => {
+          const val = answers[q.id];
+          if (val === 'na') return -1;
+          const n = Number(val);
+          if (!Number.isNaN(n) && n >= 0 && n <= 5) return n;
+          return (q.options.find(o => o.value === val)?.level ?? 0);
+        })()
       }))
     };
     setSubmitting(true);
@@ -121,7 +150,13 @@ export default function QuestionnaireForm({ questionnaire }: { questionnaire: Qu
               {q.category && <div className="mt-1"><Badge variant="neutral">{q.category}</Badge></div>}
             </div>
             <div className="flex flex-wrap gap-2 p-3">
-              {q.options.map(opt => {
+              {/* N/A option */}
+              <button
+                type="button"
+                onClick={() => onChange(q.id, 'na')}
+                className={`rounded border px-2 py-1 text-[11px] ${answers[q.id]==='na' ? 'bg-gray-500 text-white border-gray-500' : 'hover:bg-gray-50'}`}
+              >N/A</button>
+              {DEFAULT_SCALE.map(opt => {
                 const active = answers[q.id] === opt.value;
                 return (
                   <button

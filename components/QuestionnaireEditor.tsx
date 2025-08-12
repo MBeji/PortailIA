@@ -11,6 +11,14 @@ export default function QuestionnaireEditor({ questionnaire }: { questionnaire: 
   const [q, setQ] = useState<Questionnaire>(questionnaire);
   const [editing, setEditing] = useState<Question | null>(null);
   const [newId, setNewId] = useState('');
+  const defaultScaleOptions: Option[] = [
+    { value: '0', label: '0 - Inexistant', level: 0 },
+    { value: '1', label: '1 - Initial', level: 1 },
+    { value: '2', label: '2 - Basique', level: 2 },
+    { value: '3', label: '3 - Intermédiaire', level: 3 },
+    { value: '4', label: '4 - Avancé', level: 4 },
+    { value: '5', label: '5 - Excellence', level: 5 }
+  ];
 
   const saveQuestion = useMutation({
     mutationFn: async (question: Question) => {
@@ -37,7 +45,12 @@ export default function QuestionnaireEditor({ questionnaire }: { questionnaire: 
   });
 
   const startEdit = (question?: Question) => {
-  if(question) setEditing(question); else setEditing({ id: newId || 'new.question', text: '', weight: 1, category: '', options: [] });
+    if (question) {
+      // If question has no options, seed default scale
+      setEditing({ ...question, options: (question.options && question.options.length ? question.options : defaultScaleOptions) });
+    } else {
+      setEditing({ id: newId || 'new.question', text: '', weight: 1, category: '', options: defaultScaleOptions });
+    }
   };
 
   const updateEditing = (patch: Partial<Question>) => {

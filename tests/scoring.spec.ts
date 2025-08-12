@@ -14,6 +14,14 @@ describe('computeDepartmentScore', () => {
     expect(res.score).toBe(11);
     expect(res.scorePercent).toBeCloseTo(73.33, 1);
   });
+  it('ignores N/A answers (negative level) from both numerator and denominator', () => {
+    const res = computeDepartmentScore([
+      { weight: 2, level: -1, maxLevel: 5 }, // N/A ignored
+      { weight: 1, level: 5, maxLevel: 5 }
+    ]);
+    expect(res.score).toBe(5);
+    expect(res.scorePercent).toBeCloseTo(100, 3);
+  });
 });
 
 describe('qualitativeLevel', () => {

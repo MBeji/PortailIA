@@ -2,8 +2,11 @@ interface AnswerScore { weight: number; level: number; maxLevel: number }
 
 export function computeDepartmentScore(answers: AnswerScore[]) {
   if(!answers.length) return { score: 0, scorePercent: 0 };
-  const totalWeighted = answers.reduce((acc,a) => acc + a.weight * a.level, 0);
-  const totalPossible = answers.reduce((acc,a) => acc + a.weight * a.maxLevel, 0);
+  // Ignore N/A answers: convention level < 0 OR maxLevel <= 0
+  const effective = answers.filter(a => a.level >= 0 && a.maxLevel > 0);
+  if(!effective.length) return { score: 0, scorePercent: 0 };
+  const totalWeighted = effective.reduce((acc,a) => acc + a.weight * a.level, 0);
+  const totalPossible = effective.reduce((acc,a) => acc + a.weight * a.maxLevel, 0);
   const ratio = totalPossible === 0 ? 0 : totalWeighted / totalPossible;
   return { score: totalWeighted, scorePercent: ratio * 100 };
 }
